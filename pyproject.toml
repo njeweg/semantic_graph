@@ -1,7 +1,34 @@
 [project]
-name = "semantic-graph"
+name = "kg-extract"
 version = "0.1.0"
-description = "Add your description here"
-readme = "README.md"
-requires-python = ">=3.14"
-dependencies = []
+description = "Knowledge graph extraction pipeline — stage 1"
+requires-python = ">=3.10"
+dependencies = [
+    # tree-sitter core (v0.23+ new API)
+    "tree-sitter>=0.23.0",
+    # per-language grammars
+    "tree-sitter-java>=0.23.0",
+    "tree-sitter-python>=0.23.0",
+    "tree-sitter-javascript>=0.23.0",   # covers TypeScript too
+    "tree-sitter-go>=0.23.0",
+    # YAML parsing for Cloud Foundry manifests
+    "pyyaml>=6.0",
+    # Notebook support
+    "pandas>=2.0",
+    # Neo4j graph database driver
+    "neo4j>=5.0",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=8.0",
+    "pytest-timeout>=2.3",
+]
+
+# No build backend — this is a scripts-only project.
+# uv manages the venv; there is nothing to package or publish.
+#
+# Typical workflow:
+#   uv sync                         # create .venv and install all deps
+#   uv run extract.py --help        # run the script
+#   uv run --group dev pytest       # run tests
