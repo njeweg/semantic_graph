@@ -14,3 +14,6 @@ wheels/
 
 # Environment variables (contains API keys and local paths)
 .env
+
+# Claude Code internal state
+.claude/
