@@ -193,8 +193,8 @@ class GraphAgent:
         neo4j_user     = neo4j_user     or os.getenv("NEO4J_USER",     "neo4j")
         neo4j_password = neo4j_password or os.getenv("NEO4J_PASSWORD", "password")
         repo_root      = repo_root      or os.getenv("REPO_ROOT",      "./repos/microservices-demo")
+        self.model     = model          or os.getenv("CLAUDE_MODEL",   "claude-opus-4-5")
         self.repo_root = Path(repo_root).resolve()
-        self.model = model
         self.driver = GraphDatabase.driver(neo4j_uri, auth=(neo4j_user, neo4j_password))
         self.client = anthropic.Anthropic()  # reads ANTHROPIC_API_KEY from env
 
