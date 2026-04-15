@@ -13,8 +13,6 @@ dependencies = [
     "tree-sitter-go>=0.23.0",
     # YAML parsing for Cloud Foundry manifests
     "pyyaml>=6.0",
-    # Notebook support
-    "pandas>=2.0",
     # Neo4j graph database driver
     "neo4j>=5.0",
 ]
