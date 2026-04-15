@@ -17,6 +17,8 @@ dependencies = [
     "neo4j>=5.0",
     # Claude API for the graph agent
     "anthropic>=0.40",
+    # .env file support
+    "python-dotenv>=1.0",
 ]
 
 [dependency-groups]

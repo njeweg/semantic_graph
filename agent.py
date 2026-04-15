@@ -28,8 +28,11 @@ from pathlib import Path
 from typing import Any
 
 import anthropic
+from dotenv import load_dotenv
 from neo4j import GraphDatabase
 from neo4j.exceptions import Neo4jError
+
+load_dotenv()  # reads .env if present
 
 log = logging.getLogger(__name__)
 
@@ -180,12 +183,16 @@ SOURCE_EXTS = {".java", ".py", ".js", ".ts", ".go", ".cs"}
 class GraphAgent:
     def __init__(
         self,
-        neo4j_uri: str = "bolt://localhost:7687",
-        neo4j_user: str = "neo4j",
-        neo4j_password: str = "password",
-        repo_root: str = "./repos/microservices-demo",
+        neo4j_uri: str | None = None,
+        neo4j_user: str | None = None,
+        neo4j_password: str | None = None,
+        repo_root: str | None = None,
         model: str = "claude-opus-4-5",
     ):
+        neo4j_uri      = neo4j_uri      or os.getenv("NEO4J_URI",      "bolt://localhost:7687")
+        neo4j_user     = neo4j_user     or os.getenv("NEO4J_USER",     "neo4j")
+        neo4j_password = neo4j_password or os.getenv("NEO4J_PASSWORD", "password")
+        repo_root      = repo_root      or os.getenv("REPO_ROOT",      "./repos/microservices-demo")
         self.repo_root = Path(repo_root).resolve()
         self.model = model
         self.driver = GraphDatabase.driver(neo4j_uri, auth=(neo4j_user, neo4j_password))

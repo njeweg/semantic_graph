@@ -8,3 +8,9 @@ wheels/
 
 # Virtual environments
 .venv
+
+# Example repos
+/repos/
+
+# Environment variables (contains API keys and local paths)
+.env
